@@ -1,0 +1,23 @@
+server:
+  port: 3333
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enable: true
+          lower-case-service-id: true
+
+      routes:
+        - id: greet-api
+          uri: http://nvn.mshome.net:9091
+          predicates:
+            - Path=/greet
+        - id: welcome-api
+          uri: lb://WELCOME-API
+          predicates:
+            - Path=/welcome
+
